@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if message %}
+        <h1 class="alert-danger alert title">{{ message }}</h1>
+    {% else %}
+        <h1 class="title">Nostalgy</h1>
+        <p class="user">{{ surname }} {{ name }}</p>
+        <p class="city">Город: {{ city }}</p>
+        <p class="img"><img src="{{ src }}" alt="Город"></p>
+    {% endif %}
+{% endblock %}

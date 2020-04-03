@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="title">{{ title }}</h1>
+
+    {% if current_user.is_authenticated %}
+        <a href="add_department" class="btn btn-dark">Создать Департамент</a>
+        <a href="/" class="btn btn-dark">Работы</a>
+    <a href="users_show/{{ current_user.id }}" class="btn btn-info">Поностальгировать</a>
+    {% endif %}
+
+    {% for item in departments %}
+        <div class="action_item">
+            <h2 class="action">Департамент # {{ loop.index }}</h2>
+
+            <table>
+                <tr class="row1">
+                    <td>Title of department</td>
+                    <td>Chief</td>
+                    <td style="text-align: center">Members</td>
+                    <td style="text-align: center">Department Email</td>
+                </tr>
+
+                <tr class="row2">
+                    <td class="dep-title">{{ item.title }}</td>
+
+                    {% for user in users %}
+                        {% if user.id == item.chief %}
+                            <td class="leader">{{ user.surname }} {{ user.name }}</td>
+                        {% endif %}
+                    {% endfor %}
+
+                    <td class="dep-members">{{ item.members }}</td>
+                    <td class="dep-email">{{ item.email }}</td>
+                </tr>
+            </table>
+            {% if current_user.is_authenticated and (current_user == item.user or current_user.id == item.chief) %}
+                <div>
+                    <a href="/department_change/{{ item.id }}" class="btn btn-warning">Изменить</a>
+                    <a href="/department_delete/{{ item.id }}" class="btn btn-danger">Удалить</a>
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% endblock %}
