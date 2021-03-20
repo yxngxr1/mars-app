@@ -13,7 +13,7 @@ freeze==1.0.10
 future==0.18.2
 idna==2.9
 itsdangerous==1.1.0
-Jinja2==2.11.1
+Jinja2==2.11.3
 MarkupSafe==1.1.1
 pycparser==2.20
 PySocks==1.7.1
